@@ -20,7 +20,7 @@ import br.edu.ifgoias.sistemaacademico.entities.Aluno;
 import br.edu.ifgoias.sistemaacademico.services.AlunoService;
 
 @RestController
-@CrossOrigin("http://www.ifgoias.edu.br:4001")
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping(value = "/alunos")
 public class AlunoResource {
 

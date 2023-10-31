@@ -1,5 +1,8 @@
 package br.edu.ifgoias.sistemaacademico.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +25,9 @@ public class Aluno implements Serializable{
 	
 	private String nome;
 	private String sexo;
-	private Date dt_nasc;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonProperty("dt_nasc")
+	private Date dtNasc;
 	
 	@ManyToMany(mappedBy = "alunos")
 	private List<Curso> cursos = new ArrayList<>();
@@ -31,11 +36,11 @@ public class Aluno implements Serializable{
 
 	}
 
-	public Aluno(Integer idaluno, String nome, String sexo, Date dt_nasc) {
+	public Aluno(Integer idaluno, String nome, String sexo, Date dtNasc) {
 		this.idaluno = idaluno;
 		this.nome = nome;
 		this.sexo = sexo;
-		this.dt_nasc = dt_nasc;
+		this.dtNasc = dtNasc;
 	}
 	
 	
@@ -74,11 +79,11 @@ public class Aluno implements Serializable{
 	}
 
 	public Date getDt_nasc() {
-		return dt_nasc;
+		return dtNasc;
 	}
 
 	public void setDt_nasc(Date dt_nasc) {
-		this.dt_nasc = dt_nasc;
+		this.dtNasc = dt_nasc;
 	}
 
 	public List<Curso> getCursos() {
@@ -93,7 +98,7 @@ public class Aluno implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dt_nasc == null) ? 0 : dt_nasc.hashCode());
+		result = prime * result + ((dtNasc == null) ? 0 : dtNasc.hashCode());
 		result = prime * result + ((idaluno == null) ? 0 : idaluno.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
@@ -109,10 +114,10 @@ public class Aluno implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Aluno other = (Aluno) obj;
-		if (dt_nasc == null) {
-			if (other.dt_nasc != null)
+		if (dtNasc == null) {
+			if (other.dtNasc != null)
 				return false;
-		} else if (!dt_nasc.equals(other.dt_nasc))
+		} else if (!dtNasc.equals(other.dtNasc))
 			return false;
 		if (idaluno == null) {
 			if (other.idaluno != null)
@@ -134,7 +139,7 @@ public class Aluno implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Aluno [idaluno=" + idaluno + ", nome=" + nome + ", sexo=" + sexo + ", dt_nasc=" + dt_nasc + ", cursos="
+		return "Aluno [idaluno=" + idaluno + ", nome=" + nome + ", sexo=" + sexo + ", dt_nasc=" + dtNasc + ", cursos="
 				+ cursos + "]";
 	}
 	
