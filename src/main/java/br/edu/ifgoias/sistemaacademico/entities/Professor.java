@@ -17,7 +17,27 @@ public class Professor implements DefaultEntitie {
     private String nome;
     private String titulacao;
 
-    @OneToMany(mappedBy = "professor")
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    public Integer getIdProfessor() {
+        return idProfessor;
+    }
 
+    public void setIdProfessor(Integer idProfessor) {
+        this.idProfessor = idProfessor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTitulacao() {
+        return titulacao;
+    }
+
+    public void setTitulacao(String titulacao) {
+        this.titulacao = titulacao;
+    }
 }
