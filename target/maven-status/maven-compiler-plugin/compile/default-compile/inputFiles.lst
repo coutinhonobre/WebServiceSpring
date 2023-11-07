@@ -1,0 +1,10 @@
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/services/AlunoService.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/resources/AlunoResource.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/repository/AlunoRepository.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/AcademicoApplication.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/repository/CursoRepository.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/services/CursoService.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/config/Config.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/entities/Curso.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/resources/CursoResource.java
+/home/larissa/workspace/projects/WebServiceSpring/src/main/java/br/edu/ifgoias/sistemaacademico/entities/Aluno.java
