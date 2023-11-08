@@ -20,7 +20,7 @@ public class Config {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")  // Substitua 3000 pela porta do seu frontend
+						.allowedOrigins("http://localhost:4200", "http://localhost:8080")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS");
 			}
 		};

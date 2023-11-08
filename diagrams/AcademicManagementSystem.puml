@@ -1,0 +1,65 @@
+@startuml Academic Management System
+
+class Aluno {
+  -Integer idaluno
+  -String nome
+  -String sexo
+  -Date dtNasc
+  -List<Curso> cursos
+}
+
+class Curso {
+  -Integer idcurso
+  -String nomecurso
+  -List<Aluno> alunos
+  -List<Disciplina> disciplinas
+}
+
+class Professor {
+  -Integer idprofessor
+  -String nome
+  -String titulacao
+  -List<Disciplina> disciplinas
+}
+
+class Disciplina {
+  -Integer iddisciplina
+  -String nome
+  -List<Curso> cursos
+  -Professor professor
+  -List<Turma> turmas
+}
+
+class Turma {
+  -Integer idturma
+  -String codigo
+  -Disciplina disciplina
+  -List<Aluno> alunos
+}
+
+class Departamento {
+  -Integer iddepartamento
+  -String nome
+  -List<Curso> cursos
+  -List<Professor> professores
+}
+
+class Avaliacao {
+  -Integer idavaliacao
+  -String tipo
+  -Double nota
+  -Aluno aluno
+  -Disciplina disciplina
+}
+
+Aluno "0..*" -- "0..*" Curso : alunos <> cursos
+Turma "0..*" -- "0..*" Aluno : alunos <> turmas
+Avaliacao "0..*" -- "1" Aluno : aluno <> Avaliacoes
+Curso "0..*" -- "0..*" Disciplina : disciplinas <> cursos
+Professor "1" -- "0..*" Disciplina : professor <> disciplinas
+Disciplina "1" -- "0..*" Turma : disciplina <> turmas
+Departamento "1" -- "0..*" Professor : professores <> Departamento
+Departamento "1" -- "0..*" Curso : cursos <> Departamento
+Avaliacao "0..*" -- "1" Disciplina : disciplina <> Avaliacoes
+
+@enduml
