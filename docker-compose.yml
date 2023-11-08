@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: WS
     ports:
       - "5432:5432"
+    volumes:
+      - /path/on/host:/var/lib/postgresql/data
   app:
     build:
       context: .
