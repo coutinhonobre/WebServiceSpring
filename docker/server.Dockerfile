@@ -14,5 +14,5 @@ RUN chmod +x mvnw
 RUN ./mvnw package -DskipTests
 
 # Run application
-CMD ["java", "-jar", "target/app.jar"]
+CMD ["java", "-jar", "target/ifgoias.jar"]
 
