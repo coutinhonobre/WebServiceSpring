@@ -52,7 +52,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const title = 'Falha na Inspeção do Código';
+            const prefixTitle = 'Falha na Inspeção do Código: ';
+            const titlePR = context.payload.pull_request.title;
+            const title = prefixTitle + titlePR;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
