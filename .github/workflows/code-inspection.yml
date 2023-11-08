@@ -63,11 +63,14 @@ jobs:
             const isIssueExist = issues.find(issue => issue.title === title);
             if (!isIssueExist) {
               const bodyIssue = `
+              Foi encontrada uma falha durante a inspeção de código no Pull Request atual. Seguem detalhes:
+
               <ul>
-                <li>SpotBugs: ${process.env.SPOTBUGS_RESULT}</li>
-                <li>PMD: ${process.env.PMD_RESULT}</li>
-                <li>Verificação de Dependência OWASP: ${process.env.OWASP_CHECK_RESULT}</li>
+                <li>ng lint: ${process.env.NG_LINT_RESULT}</li>
+                <li>npm audit: ${process.env.NPM_AUDIT_RESULT}</li>
               </ul>
+            
+              Para mais informações, veja o [Pull Request #${prNumber}](${prLink}).
               `;
               const responseCreateIssue = await github.rest.issues.create({
                 owner: context.repo.owner,
