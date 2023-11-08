@@ -1,7 +1,7 @@
 name: Issue to Project Board Automation
 on:
   issues:
-    types: [open]
+    types: [Open, Closed]
 
 jobs:
   automate-project-columns:
