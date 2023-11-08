@@ -37,6 +37,7 @@ public class ProfessorService {
     public Professor update(Integer id, Professor professor) {
         return repository.findById(id).map(p -> {
             p.setNome(professor.getNome());
+            p.setTitulacao(professor.getTitulacao());
             return repository.save(p);
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
