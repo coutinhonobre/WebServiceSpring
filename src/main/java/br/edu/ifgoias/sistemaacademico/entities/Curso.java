@@ -20,7 +20,7 @@ public class Curso  implements Serializable{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Integer idcurso;
+	private Integer idCurso;
 	
 	@Column (name = "nomecurso", nullable = false)
 	private String nomecurso;
@@ -36,8 +36,8 @@ public class Curso  implements Serializable{
 		
 	}
 
-	public Curso(Integer idcurso, String nomecurso) {
-		this.idcurso = idcurso;
+	public Curso(Integer idCurso, String nomecurso) {
+		this.idCurso = idCurso;
 		this.nomecurso = nomecurso;
 	}
 
@@ -52,12 +52,12 @@ public class Curso  implements Serializable{
 		a.getCursos().remove(this);
 	}
 		
-	public Integer getIdcurso() {
-		return idcurso;
+	public Integer getIdCurso() {
+		return idCurso;
 	}
 
-	public void setIdcurso(Integer idcurso) {
-		this.idcurso = idcurso;
+	public void setIdCurso(Integer idcurso) {
+		this.idCurso = idcurso;
 	}
 
 	public String getNomecurso() {
@@ -80,7 +80,7 @@ public class Curso  implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idcurso == null) ? 0 : idcurso.hashCode());
+		result = prime * result + ((idCurso == null) ? 0 : idCurso.hashCode());
 		result = prime * result + ((nomecurso == null) ? 0 : nomecurso.hashCode());
 		return result;
 	}
@@ -94,10 +94,10 @@ public class Curso  implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		if (idcurso == null) {
-			if (other.idcurso != null)
+		if (idCurso == null) {
+			if (other.idCurso != null)
 				return false;
-		} else if (!idcurso.equals(other.idcurso))
+		} else if (!idCurso.equals(other.idCurso))
 			return false;
 		if (nomecurso == null) {
 			if (other.nomecurso != null)
@@ -109,7 +109,7 @@ public class Curso  implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Curso [idcurso=" + idcurso + ", nomecurso=" + nomecurso + ", alunos=" + alunos + "]";
+		return "Curso [idcurso=" + idCurso + ", nomecurso=" + nomecurso + ", alunos=" + alunos + "]";
 	}
 		
 }
