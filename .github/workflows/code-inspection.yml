@@ -34,25 +34,30 @@ jobs:
         run: mvn -B org.owasp:dependency-check-maven:8.4.2:check
 
       - name: Create Issue on Failure
-        if: ${{ failure() }}
+        if: failure() # Simplified without braces
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue_body = `
               ## Code Inspection Failures
-              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
-              - PMD: ${process.env.PMD_RESULT}
-              - OWASP Dependency Check: ${process.env.OWASP_CHECK_RESULT}
+              - SpotBugs: ${{ steps.spotbugs.outcome == 'failure' ? 'failed' : 'passed' }}
+              - PMD: ${{ steps.pmd.outcome == 'failure' ? 'failed' : 'passed' }}
+              - OWASP Dependency Check: ${{ steps.owasp-check.outcome == 'failure' ? 'failed' : 'passed' }}
             `;
-            github.rest.issues.create({
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Code Inspection Failure',
-              body: issue_body
+              body: issue_body.trim()
             });
             core.setFailed("Code inspection failed and issue was created.");
-          env:
-            SPOTBUGS_RESULT: ${{ steps.spotbugs.outcome == 'failure' ? 'SpotBugs failed' : 'SpotBugs passed' }}
-            PMD_RESULT: ${{ steps.pmd.outcome == 'failure' ? 'PMD failed' : 'PMD passed' }}
-            OWASP_CHECK_RESULT: ${{ steps.owasp-check.outcome == 'failure' ? 'OWASP Dependency Check failed' : 'OWASP Dependency Check passed' }}
+        env:
+          SPOTBUGS_RESULT:
+            ${{ steps.spotbugs.outcome == 'failure' ? 'failed': 'passed' } }
+          PMD_RESULT:
+            ${{ steps.pmd.outcome == 'failure' ? 'failed': 'passed' } }
+          OWASP_CHECK_RESULT:
+            ${{ steps.owasp-check.outcome == 'failure' ? 'failed': 'passed' } }
+
+          
