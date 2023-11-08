@@ -52,7 +52,7 @@ jobs:
               body: issue_body
             });
             core.setFailed("Code inspection failed and issue was created.");
-            env:
+          env:
             SPOTBUGS_RESULT: ${{ steps.spotbugs.outcome == 'failure' ? 'SpotBugs failed' : 'SpotBugs passed' }}
             PMD_RESULT: ${{ steps.pmd.outcome == 'failure' ? 'PMD failed' : 'PMD passed' }}
             OWASP_CHECK_RESULT: ${{ steps.owasp-check.outcome == 'failure' ? 'OWASP Dependency Check failed' : 'OWASP Dependency Check passed' }}
