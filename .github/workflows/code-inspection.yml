@@ -22,12 +22,15 @@ jobs:
         run: mvn -B clean install -DskipTests
 
       - name: Run SpotBugs
+        id: spotbugs
         run: mvn -B com.github.spotbugs:spotbugs-maven-plugin:4.8.1.0:check
 
       - name: Run PMD
+        id: pmd
         run: mvn -B org.apache.maven.plugins:maven-pmd-plugin:3.15.0:check
 
       - name: Run OWASP Dependency Check
+        id: owasp-check
         run: mvn -B org.owasp:dependency-check-maven:8.4.2:check
 
       - name: Create Issue on Failure
@@ -47,8 +50,9 @@ jobs:
               repo: context.repo.repo,
               title: 'Code Inspection Failure',
               body: issue_body
-            })
+            });
+            core.setFailed("Code inspection failed and issue was created.");
             env:
-            SPOTBUGS_RESULT: ${{ steps.spotbugs.outcome == 'failure' ? 'Failed' : 'Passed' }}
-            PMD_RESULT: ${{ steps.pmd.outcome == 'failure' ? 'Failed' : 'Passed' }}
-            OWASP_CHECK_RESULT: ${{ steps.owasp-check.outcome == 'failure' ? 'Failed' : 'Passed' }}
+            SPOTBUGS_RESULT: ${{ steps.spotbugs.outcome == 'failure' ? 'SpotBugs failed' : 'SpotBugs passed' }}
+            PMD_RESULT: ${{ steps.pmd.outcome == 'failure' ? 'PMD failed' : 'PMD passed' }}
+            OWASP_CHECK_RESULT: ${{ steps.owasp-check.outcome == 'failure' ? 'OWASP Dependency Check failed' : 'OWASP Dependency Check passed' }}
