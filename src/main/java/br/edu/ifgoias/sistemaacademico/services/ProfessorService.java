@@ -28,10 +28,10 @@ public class ProfessorService {
     }
 
     public void delete(Integer id) {
-        repository.findById(id).map(professor -> {
-            repository.delete(professor);
-            return Void.TYPE;
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        repository.findById(id).ifPresentOrElse(
+                repository::delete,
+                () -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND); }
+        );
     }
 
     public Professor update(Integer id, Professor professor) {
