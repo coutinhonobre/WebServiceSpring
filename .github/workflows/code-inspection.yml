@@ -29,3 +29,26 @@ jobs:
 
       - name: Run OWASP Dependency Check
         run: mvn -B org.owasp:dependency-check-maven:8.4.2:check
+
+      - name: Create Issue on Failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_body = `
+              ## Code Inspection Failures
+              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
+              - PMD: ${process.env.PMD_RESULT}
+              - OWASP Dependency Check: ${process.env.OWASP_CHECK_RESULT}
+            `;
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Code Inspection Failure',
+              body: issue_body
+            })
+            env:
+            SPOTBUGS_RESULT: ${{ steps.spotbugs.outcome == 'failure' ? 'Failed' : 'Passed' }}
+            PMD_RESULT: ${{ steps.pmd.outcome == 'failure' ? 'Failed' : 'Passed' }}
+            OWASP_CHECK_RESULT: ${{ steps.owasp-check.outcome == 'failure' ? 'Failed' : 'Passed' }}
