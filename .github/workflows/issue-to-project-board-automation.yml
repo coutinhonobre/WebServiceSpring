@@ -4,12 +4,13 @@ on:
     types: [opened]
 
 jobs:
-  auto-add-to-project:
+  automate-project-columns:
     runs-on: ubuntu-latest
     steps:
       - name: Automate adding issues to project board
-        uses: alex-page/github-project-automation-plus@v0.8.3
+      - uses: alex-page/github-project-automation-plus@v0.8.3
         with:
-          project: 'Projeto de Testes de Software - 2023'
-          column: 'Issues'
+          project: Projeto de Testes de Software - 2023
+          column: Issues
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
