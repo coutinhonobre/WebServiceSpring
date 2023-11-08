@@ -53,9 +53,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue_body = `
-            - SpotBugs: ${process.env.SPOTBUGS_RESULT}
-            - PMD: ${process.env.PMD_RESULT}
-            - OWASP Dependency Check: ${process.env.OWASP_CHECK_RESULT}
+              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
+              - PMD: ${process.env.PMD_RESULT}
+              - OWASP Dependency Check: ${process.env.OWASP_CHECK_RESULT}
             `;
             await github.rest.issues.create({
               owner: context.repo.owner,
