@@ -48,7 +48,7 @@ jobs:
 
       - name: Create Issue on Failure
         if: ${{ failure() }}
-        uses: actions/core@v2
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
