@@ -52,17 +52,30 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue_body = `
-              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
-              - PMD: ${process.env.PMD_RESULT}
-              - OWASP Dependency Check: ${process.env.OWASP_CHECK_RESULT}
-            `;
-            await github.rest.issues.create({
+            const title = 'Falha na Inspeção do Código';
+            const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: 'Code Inspection Failure',
-              body: issue_body.trim()
+              state: 'open',
             });
-            core.setFailed("Code inspection failed and issue was created.");
+            const isIssueExist = issues.find(issue => issue.title === title);
+            if (!isIssueExist) {
+              const bodyIssue = `
+              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
+              - PMD: ${process.env.PMD_RESULT}
+              - Verificação de Dependência OWASP: ${process.env.OWASP_CHECK_RESULT}
+              `;
+              const responseCreateIssue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: bodyIssue.trim()
+              });
+              if (responseCreateIssue.status !== 201) {
+                core.setFailed("Falha ao criar issue para falha na inspeção do código.");
+              }
+            } else {
+              console.log("Uma issue aberta com a falha na inspeção do código já existe.");
+            }
 
           
