@@ -52,6 +52,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const prNumber = context.payload.number;
+            const prLink = context.payload.pull_request.html_url;
             const prefixTitle = 'Falha na Inspeção do Código: ';
             const titlePR = context.payload.pull_request.title;
             const title = prefixTitle + titlePR;
@@ -66,8 +68,9 @@ jobs:
               Foi encontrada uma falha durante a inspeção de código no Pull Request atual. Seguem detalhes:
 
               <ul>
-                <li>ng lint: ${process.env.NG_LINT_RESULT}</li>
-                <li>npm audit: ${process.env.NPM_AUDIT_RESULT}</li>
+                <li>SpotBugs: ${process.env.SPOTBUGS_RESULT}</li>
+                <li>PMD: ${process.env.PMD_RESULT}</li>
+                <li>Verificação de Dependência OWASP: ${process.env.OWASP_CHECK_RESULT}</li>
               </ul>
             
               Para mais informações, veja o [Pull Request #${prNumber}](${prLink}).
