@@ -61,9 +61,11 @@ jobs:
             const isIssueExist = issues.find(issue => issue.title === title);
             if (!isIssueExist) {
               const bodyIssue = `
-              - SpotBugs: ${process.env.SPOTBUGS_RESULT}
-              - PMD: ${process.env.PMD_RESULT}
-              - Verificação de Dependência OWASP: ${process.env.OWASP_CHECK_RESULT}
+              <ul>
+                <li>SpotBugs: ${process.env.SPOTBUGS_RESULT}</li>
+                <li>PMD: ${process.env.PMD_RESULT}</li>
+                <li>Verificação de Dependência OWASP: ${process.env.OWASP_CHECK_RESULT}</li>
+              </ul>
               `;
               const responseCreateIssue = await github.rest.issues.create({
                 owner: context.repo.owner,
