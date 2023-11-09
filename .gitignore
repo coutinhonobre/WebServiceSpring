@@ -8,4 +8,4 @@
 *.iws
 *.class
 *.list
-./target
+target/
