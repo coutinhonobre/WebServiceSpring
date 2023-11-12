@@ -41,8 +41,8 @@ jobs:
       - name: Fail if coverage is below 20%
         run: |
           coverage=${{ steps.jacoco.outputs.coverage }}
-          if (( $(echo "$coverage < 0.10" |bc -l) )); then
-            echo "Test coverage is below 10%!"
+          if (( $(echo "$coverage < 0.20" |bc -l) )); then
+            echo "Test coverage is below 20%!"
             exit 1
           fi
         continue-on-error: true
