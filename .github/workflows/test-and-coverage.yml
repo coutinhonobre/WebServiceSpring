@@ -45,20 +45,4 @@ jobs:
             echo "Test coverage is below 20%!"
             exit 1
           fi
-        continue-on-error: true
-
-      - name: Add comment to PR if coverage fails
-        if: failure()
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const issue_number = context.issue.number;
-            const message = "A cobertura de testes está abaixo de 20%. Por favor, aumente a cobertura para melhorar a qualidade do código. 🚀\n" +
-            "Confira o relatório de cobertura de testes para mais detalhes.";
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
-              body: message
-            });    
+        
