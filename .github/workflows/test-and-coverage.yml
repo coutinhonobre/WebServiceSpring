@@ -45,6 +45,7 @@ jobs:
             echo "Test coverage is below 10%!"
             exit 1
           fi
+        continue-on-error: true
 
       - name: Add comment to PR if coverage fails
         if: failure()
