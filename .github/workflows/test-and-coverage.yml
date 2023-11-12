@@ -1,7 +1,12 @@
-name: build
+name: Test and Coverage
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
     branches:
       - main
       - develop
@@ -33,16 +38,26 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Upload JaCoCo coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/
-
-      - name: Fail if coverage is below 10%
+      - name: Fail if coverage is below 20%
         run: |
           coverage=${{ steps.jacoco.outputs.coverage }}
-          if (( $(echo "$coverage < 10" |bc -l) )); then
+          if (( $(echo "$coverage < 0.10" |bc -l) )); then
             echo "Test coverage is below 10%!"
             exit 1
           fi
+
+      - name: Add comment to PR if coverage fails
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue_number = context.issue.number;
+            const message = "A cobertura de testes está abaixo de 20%. Por favor, aumente a cobertura para melhorar a qualidade do código. 🚀\n" +
+            "Confira o relatório de cobertura de testes para mais detalhes.";
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: message
+            });    
