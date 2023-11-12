@@ -15,14 +15,16 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v2
 
-      - name: Configurar Java
+      - name: Set up JDK 16
         uses: actions/setup-java@v2
         with:
-          java-version: 16
+          java-version: '16'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Build e Testes com Cobertura
         run: |
-          mvn clean test jacoco:report
+          mvn -B clean install test jacoco:report
 
       - name: Verificar Cobertura de Código
         run: |
