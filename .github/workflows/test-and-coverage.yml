@@ -28,12 +28,18 @@ jobs:
 
       - name: Verificar Cobertura de Código
         run: |
+          mvn -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn jacoco:report-only
           COVERAGE=$(mvn -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn jacoco:report-only | grep "Overall coverage rate:")
+          if [ -z "$COVERAGE" ]; then
+            echo "Coverage information could not be parsed."
+            exit 1
+          fi
           COVERAGE=${COVERAGE#*:}
           COVERAGE=${COVERAGE%(*}
           echo "Cobertura de código: $COVERAGE%"
-          if (( $(bc <<< "$COVERAGE < 10") )); then
+          if [ -z "$COVERAGE" ] || (( $(echo "$COVERAGE < 10" | bc) )); then
             echo "A cobertura de código é menor que 10%: $COVERAGE%"
             exit 1
           fi
+      
 
