@@ -26,6 +26,11 @@ jobs:
         run: |
           mvn -B clean install test jacoco:report
 
+      - name: Build e Testes com Cobertura
+        run: |
+          mvn -B clean verify jacoco:report
+    
+
       - name: Verificar Cobertura de Código
         run: |
           mvn -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn jacoco:report-only
