@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -20,6 +21,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
+@ActiveProfiles("test")
 @SpringBootTest
 class AlunoResourceTest {
 

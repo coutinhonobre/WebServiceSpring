@@ -1,0 +1,35 @@
+name: Test and Coverage Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - master
+
+jobs:
+  test-and-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+
+      - name: Build e Testes com Cobertura
+        run: |
+          mvn clean test jacoco:report
+
+      - name: Verificar Cobertura de Código
+        run: |
+          COVERAGE=$(mvn jacoco:report -q -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn | grep "Overall coverage rate:")
+          COVERAGE=${COVERAGE#*:}
+          COVERAGE=${COVERAGE%(*}
+          if (( $(bc <<< "$COVERAGE < 10") )); then
+            echo "A cobertura de código é menor que 10%: $COVERAGE%"
+            exit 1
+          fi
