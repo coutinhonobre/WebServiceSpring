@@ -26,8 +26,12 @@ import br.edu.ifgoias.sistemaacademico.services.AlunoService;
 @RequestMapping(value = "/alunos")
 public class AlunoResource {
 
+	private final AlunoService service;
+
 	@Autowired
-	private AlunoService service;
+	public AlunoResource(AlunoService service) {
+		this.service = service;
+	}
 
 	@GetMapping
 	public ResponseEntity<List<Aluno>> findAll() {

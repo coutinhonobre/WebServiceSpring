@@ -26,8 +26,12 @@ import br.edu.ifgoias.sistemaacademico.services.CursoService;
 @RequestMapping ( value = "/cursos")
 public class CursoResource {
 
+	private final CursoService service;
+
 	@Autowired
-	private CursoService service;
+	public CursoResource(CursoService service) {
+		this.service = service;
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<Curso>> findAll(){
