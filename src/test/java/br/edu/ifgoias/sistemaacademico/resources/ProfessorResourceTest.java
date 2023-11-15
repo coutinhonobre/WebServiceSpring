@@ -28,7 +28,7 @@ import br.edu.ifgoias.sistemaacademico.utils.ProfessorMapper;
 
 @ActiveProfiles("test")
 @SpringBootTest
-public class ProfessorResourceTest {
+class ProfessorResourceTest {
 
     @Mock
     ProfessorService professorService;

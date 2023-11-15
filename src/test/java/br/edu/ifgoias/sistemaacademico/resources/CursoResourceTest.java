@@ -25,7 +25,7 @@ import br.edu.ifgoias.sistemaacademico.services.CursoService;
 import br.edu.ifgoias.sistemaacademico.utils.CursoMapper;
 @ActiveProfiles("test")
 @SpringBootTest
-public class CursoResourceTest {
+class CursoResourceTest {
 
 	@Mock
 	CursoService cursoService;
