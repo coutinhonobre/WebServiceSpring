@@ -15,6 +15,16 @@ public class Professor implements Serializable {
     private String nome;
     private String titulacao;
 
+    public Professor(Integer idProfessor, String nome, String titulacao) {
+    	this.idProfessor = idProfessor;
+    	this.nome = nome;
+    	this.titulacao = titulacao;
+    }
+
+    public Professor() {
+
+    }
+
     public Integer getIdProfessor() {
         return idProfessor;
     }
