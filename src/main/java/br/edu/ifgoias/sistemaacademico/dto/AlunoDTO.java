@@ -44,7 +44,7 @@ public class AlunoDTO {
     }
 
     public Date getDtNasc() {
-        return dtNasc;
+        return new Date(getDtNasc().getTime());
     }
 
     @Override

@@ -69,11 +69,11 @@ public class Curso  implements Serializable{
 	}
 
 	public List<Aluno> getAlunos() {
-		return alunos;
+		return new ArrayList<>(alunos);
 	}
 
 	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+		this.alunos = new ArrayList<>(alunos);
 	}
 
 	@Override
