@@ -64,6 +64,9 @@
 						<version>4.8.1</version>
 					</dependency>
 				</dependencies>
+				<configuration>
+					<excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
