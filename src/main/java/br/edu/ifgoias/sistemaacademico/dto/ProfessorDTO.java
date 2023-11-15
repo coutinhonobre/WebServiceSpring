@@ -1,9 +1,9 @@
 package br.edu.ifgoias.sistemaacademico.dto;
 
 public class ProfessorDTO {
-    public Integer idProfessor;
-    public String nome;
-    public String titulacao;
+    private Integer idProfessor;
+    private String nome;
+    private String titulacao;
 
     public ProfessorDTO() {
 
