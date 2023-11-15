@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping(value = "/professores")
 public class ProfessorResource {
 
+    private final ProfessorService service;
+
     @Autowired
-    private ProfessorService service;
+    public ProfessorResource(ProfessorService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Professor>> findAll() {
