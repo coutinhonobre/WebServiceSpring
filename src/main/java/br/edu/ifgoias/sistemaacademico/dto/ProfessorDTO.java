@@ -1,5 +1,7 @@
 package br.edu.ifgoias.sistemaacademico.dto;
 
+import java.util.Objects;
+
 public class ProfessorDTO {
     private Integer idProfessor;
     private String nome;
@@ -30,5 +32,20 @@ public class ProfessorDTO {
 
     public String getTitulacao() {
     	return titulacao;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfessorDTO professorDTO = (ProfessorDTO) o;
+        return Objects.equals(idProfessor, professorDTO.idProfessor) &&
+                Objects.equals(nome, professorDTO.nome) &&
+                Objects.equals(titulacao, professorDTO.titulacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProfessor, nome, titulacao);
     }
 }

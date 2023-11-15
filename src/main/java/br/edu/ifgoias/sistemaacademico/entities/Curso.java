@@ -32,12 +32,11 @@ public class Curso  implements Serializable{
 				)
 	private List<Aluno> alunos = new ArrayList<>();
 	
-	public Curso() {
-		
-	}
-
 	public Curso(Integer idCurso, String nomecurso) {
 		this.idCurso = idCurso;
+		this.nomecurso = nomecurso;
+	}
+	public Curso(String nomecurso) {
 		this.nomecurso = nomecurso;
 	}
 
