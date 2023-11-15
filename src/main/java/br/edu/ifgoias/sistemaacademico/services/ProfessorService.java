@@ -11,9 +11,13 @@ import java.util.List;
 
 @Service
 public class ProfessorService {
+    private final ProfessorRepository repository;
 
     @Autowired
-    private ProfessorRepository repository;
+    public ProfessorService(ProfessorRepository repository) {
+        this.repository = repository;
+    }
+
 
     public List<Professor> findAll() {
         return repository.findAll();
