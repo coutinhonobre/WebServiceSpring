@@ -29,10 +29,9 @@ public class AlunoService {
 	}
 
 	public void delete(Integer id) {
-		repository.findById(id).map(aluno -> {
-			repository.delete(aluno);
-			return Void.TYPE;
-		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		repository.findById(id).ifPresentOrElse(repository::delete, () -> {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		});
 	}
 
 	public Aluno update(Integer id, Aluno obj) {
