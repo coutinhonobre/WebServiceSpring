@@ -2,6 +2,8 @@ package br.edu.ifgoias.sistemaacademico.resources;
 
 import java.util.List;
 
+import br.edu.ifgoias.sistemaacademico.dto.CursoDTO;
+import br.edu.ifgoias.sistemaacademico.utils.CursoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,9 +43,11 @@ public class CursoResource {
 	
 	@PostMapping
 	@ResponseStatus (HttpStatus.CREATED)
-	public ResponseEntity<Curso> insert(@RequestBody Curso c) {
-	       c = service.insert(c);
-		   return ResponseEntity.ok().body(c);
+	public ResponseEntity<CursoDTO> insert(@RequestBody CursoDTO dto) {
+		Curso curso = new CursoMapper().convertDTOParaEntidade(dto);
+		curso = service.insert(curso);
+		CursoDTO response = new CursoMapper().convertEntidadeParaDTO(curso);
+		return ResponseEntity.ok().body(response);
 	}
 	
 	@DeleteMapping (value = "/{id}")
@@ -54,8 +58,12 @@ public class CursoResource {
 	
 	@PutMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.OK)		
-	public ResponseEntity<Curso> update (@PathVariable Integer id, @RequestBody Curso c){
-		c = service.update(id, c);
-		return ResponseEntity.ok().body(c);
+	public ResponseEntity<CursoDTO> update (@PathVariable Integer id, @RequestBody CursoDTO dto){
+		CursoMapper cursoMapper = new CursoMapper();
+		Curso curso = cursoMapper.convertDTOParaEntidade(dto);
+		curso.setIdCurso(id);
+		curso = service.update(id, curso);
+		CursoDTO response = cursoMapper.convertEntidadeParaDTO(curso);
+		return ResponseEntity.ok().body(response);
 	}
 }

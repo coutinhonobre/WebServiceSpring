@@ -2,12 +2,10 @@ package br.edu.ifgoias.sistemaacademico.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 
 @Entity
-public class Professor implements DefaultEntitie {
+public class Professor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,6 +14,16 @@ public class Professor implements DefaultEntitie {
     private Integer idProfessor;
     private String nome;
     private String titulacao;
+
+    public Professor(Integer idProfessor, String nome, String titulacao) {
+    	this.idProfessor = idProfessor;
+    	this.nome = nome;
+    	this.titulacao = titulacao;
+    }
+
+    public Professor() {
+
+    }
 
     public Integer getIdProfessor() {
         return idProfessor;

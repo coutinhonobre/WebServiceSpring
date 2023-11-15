@@ -1,9 +1,9 @@
 package br.edu.ifgoias.sistemaacademico.resources;
 
-import br.edu.ifgoias.sistemaacademico.entities.DefaultEntitie;
+import br.edu.ifgoias.sistemaacademico.dto.ProfessorDTO;
 import br.edu.ifgoias.sistemaacademico.entities.Professor;
-import br.edu.ifgoias.sistemaacademico.services.AlunoService;
 import br.edu.ifgoias.sistemaacademico.services.ProfessorService;
+import br.edu.ifgoias.sistemaacademico.utils.ProfessorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +33,11 @@ public class ProfessorResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Professor> insert(@RequestBody Professor p) {
-        p = service.insert(p);
-        return ResponseEntity.ok().body(p);
+    public ResponseEntity<ProfessorDTO> insert(@RequestBody ProfessorDTO dto) {
+        Professor professor = new ProfessorMapper().convertDTOParaEntidade(dto);
+        professor = service.insert(professor);
+        ProfessorDTO response = new ProfessorMapper().convertEntidadeParaDTO(professor);
+        return ResponseEntity.ok().body(response);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -46,8 +48,11 @@ public class ProfessorResource {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Professor> update(@PathVariable Integer id, @RequestBody Professor p) {
-        p = service.update(id, p);
-        return ResponseEntity.ok().body(p);
+    public ResponseEntity<ProfessorDTO> update(@PathVariable Integer id, @RequestBody ProfessorDTO dto) {
+        ProfessorMapper professorMapper = new ProfessorMapper();
+        Professor professor = professorMapper.convertDTOParaEntidade(dto);
+        professor = service.update(id, professor);
+        ProfessorDTO response = professorMapper.convertEntidadeParaDTO(professor);
+        return ResponseEntity.ok().body(response);
     }
 }
