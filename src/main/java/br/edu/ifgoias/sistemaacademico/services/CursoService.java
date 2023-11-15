@@ -29,11 +29,10 @@ public class CursoService {
 	}
 	
 	public void delete (Integer id) {
-			repository.findById(id).map(
-				curso -> {
-							repository.delete(curso);
-							return Void.TYPE;
-						 }).orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND)  );		
+		repository.findById(id).ifPresentOrElse(
+				repository::delete,
+				() -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND); }
+		);
 	}
 	
 	public Curso update (Integer id, Curso obj) {
