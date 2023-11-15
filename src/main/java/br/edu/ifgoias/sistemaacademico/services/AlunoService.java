@@ -13,8 +13,12 @@ import br.edu.ifgoias.sistemaacademico.repository.AlunoRepository;
 @Service
 public class AlunoService {
 
+	private final AlunoRepository repository;
+
 	@Autowired
-	private AlunoRepository repository;
+	public AlunoService(AlunoRepository repository) {
+		this.repository = repository;
+	}
 
 	public List<Aluno> findAll() {
 		return repository.findAll();

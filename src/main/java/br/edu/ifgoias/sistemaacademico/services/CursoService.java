@@ -13,8 +13,12 @@ import br.edu.ifgoias.sistemaacademico.repository.CursoRepository;
 @Service
 public class CursoService {
 
+	private final CursoRepository repository;
+
 	@Autowired
-	private CursoRepository repository;
+	public CursoService(CursoRepository repository) {
+		this.repository = repository;
+	}
 	
 	public List<Curso> findAll(){
 		return repository.findAll();
