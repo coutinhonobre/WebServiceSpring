@@ -40,9 +40,14 @@ public class Aluno implements Serializable{
 		this.idaluno = idaluno;
 		this.nome = nome;
 		this.sexo = sexo;
-		this.dtNasc = dtNasc;
+		this.dtNasc = new Date(dtNasc.getTime());
 	}
-	
+
+	public Aluno(String nome, String sexo, Date dtNasc) {
+		this.nome = nome;
+		this.sexo = sexo;
+		this.dtNasc = new Date(dtNasc.getTime());
+	}
 	
 	public void adicionarCurso(Curso c) {
 		this.cursos.add(c);
@@ -78,11 +83,11 @@ public class Aluno implements Serializable{
 		this.sexo = sexo;
 	}
 
-	public Date getDt_nasc() {
+	public Date getDtNasc() {
 		return dtNasc;
 	}
 
-	public void setDt_nasc(Date dt_nasc) {
+	public void setDtNasc(Date dt_nasc) {
 		this.dtNasc = dt_nasc;
 	}
 

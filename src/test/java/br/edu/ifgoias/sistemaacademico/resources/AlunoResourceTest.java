@@ -1,7 +1,9 @@
 package br.edu.ifgoias.sistemaacademico.resources;
 
+import br.edu.ifgoias.sistemaacademico.dto.AlunoDTO;
 import br.edu.ifgoias.sistemaacademico.entities.Aluno;
 import br.edu.ifgoias.sistemaacademico.services.AlunoService;
+import br.edu.ifgoias.sistemaacademico.utils.AlunoMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,7 +37,7 @@ class AlunoResourceTest {
     AlunoResource alunoResource;
 
     @Test
-    public void findAll_ShouldReturnAllStudents() {
+    void findAll_ShouldReturnAllStudents() {
         // Given
         List<Aluno> expectedAlunos = Arrays.asList(
                 new Aluno(1, "Aluno 1", "M", new Date()),
@@ -52,7 +54,7 @@ class AlunoResourceTest {
     }
 
     @Test
-    public void findById_ShouldReturnStudentWhenIdExists() {
+    void findById_ShouldReturnStudentWhenIdExists() {
         // Given
         int validId = 10;
         Aluno expectedAluno = new Aluno(validId, "Aluno", "M", new Date());
@@ -66,35 +68,43 @@ class AlunoResourceTest {
     }
 
     @Test
-    public void insert_ShouldReturnInsertedStudent() {
+    void insert_ShouldReturnInsertedStudent() {
         // Given
-        Aluno alunoToInsert = new Aluno(null, "New Aluno", "M", new Date());
-        Aluno expectedAluno = new Aluno(10, "New Aluno", "M", new Date());
+        AlunoDTO alunoToInsert = new AlunoDTO("New Aluno", "M", new Date());
+        Aluno expectedAluno = new Aluno("New Aluno", "M", new Date());
+        AlunoDTO expectedAlunoDTO = AlunoMapper.convertEntidadeParaDTO(expectedAluno);
+
         given(alunoService.insert(any(Aluno.class))).willReturn(expectedAluno);
 
         // When
-        ResponseEntity<Aluno> actualResponse = alunoResource.insert(alunoToInsert);
+        ResponseEntity<AlunoDTO> actualResponse = alunoResource.insert(alunoToInsert);
 
         // Then
-        assertEquals(ResponseEntity.ok(expectedAluno), actualResponse);
+        assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
+        assertEquals(expectedAlunoDTO, actualResponse.getBody());
+        verify(alunoService, times(1)).insert(any(Aluno.class));
     }
 
     @Test
-    public void update_ShouldReturnUpdatedStudentWhenIdExists() {
+    void update_ShouldReturnUpdatedStudentWhenIdExists() {
         // Given
         int existingId = 10;
-        Aluno alunoToUpdate = new Aluno(existingId, "Updated Aluno", "M", new Date());
-        given(alunoService.update(eq(existingId), any(Aluno.class))).willReturn(alunoToUpdate);
+        AlunoDTO alunoToUpdate = new AlunoDTO(existingId, "Updated Aluno", "M", new Date());
+        Aluno updatedAluno = new Aluno(existingId, "Updated Aluno", "M", new Date());
+        AlunoDTO updatedAlunoDTO = AlunoMapper.convertEntidadeParaDTO(updatedAluno);
+
+        given(alunoService.update(eq(existingId), any(Aluno.class))).willReturn(updatedAluno);
 
         // When
-        ResponseEntity<Aluno> actualResponse = alunoResource.update(existingId, alunoToUpdate);
+        ResponseEntity<AlunoDTO> actualResponse = alunoResource.update(existingId, alunoToUpdate);
 
         // Then
-        assertEquals(ResponseEntity.ok(alunoToUpdate), actualResponse);
+        assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
+        assertEquals(updatedAlunoDTO, actualResponse.getBody());
     }
 
     @Test
-    public void delete_ShouldCallServiceToDeleteStudentAndReturnNoContent() {
+    void delete_ShouldCallServiceToDeleteStudentAndReturnNoContent() {
         // Given
         int validId = 10;
         doNothing().when(alunoService).delete(validId);
