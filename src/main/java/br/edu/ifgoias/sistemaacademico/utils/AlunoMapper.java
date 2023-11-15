@@ -3,13 +3,10 @@ package br.edu.ifgoias.sistemaacademico.utils;
 import br.edu.ifgoias.sistemaacademico.entities.Aluno;
 import br.edu.ifgoias.sistemaacademico.dto.AlunoDTO;
 
-public class AlunoMapper {
+public class AlunoMapper implements GenericMapper<Aluno, AlunoDTO> {
 
-    private AlunoMapper() {
-        throw new IllegalStateException("Utility class");
-    }
-
-    public static Aluno convertDTOParaEntidade(AlunoDTO dto) {
+    @Override
+    public Aluno convertDTOParaEntidade(AlunoDTO dto) {
         return new Aluno(
                 dto.getIdaluno(),
                 dto.getNome(),
@@ -18,7 +15,8 @@ public class AlunoMapper {
         );
     }
 
-    public static AlunoDTO convertEntidadeParaDTO(Aluno aluno) {
+    @Override
+    public AlunoDTO convertEntidadeParaDTO(Aluno aluno) {
         return new AlunoDTO(
                 aluno.getIdaluno(),
                 aluno.getNome(),
@@ -26,4 +24,5 @@ public class AlunoMapper {
                 aluno.getDtNasc()
         );
     }
+
 }

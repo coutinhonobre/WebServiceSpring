@@ -87,8 +87,8 @@ public class Aluno implements Serializable{
 		return dtNasc;
 	}
 
-	public void setDtNasc(Date dt_nasc) {
-		this.dtNasc = dt_nasc;
+	public void setDtNasc(Date dtNasc) {
+		this.dtNasc = dtNasc;
 	}
 
 	public List<Curso> getCursos() {

@@ -44,9 +44,9 @@ public class AlunoResource {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<AlunoDTO> insert(@RequestBody AlunoDTO dto) {
-		Aluno aluno = AlunoMapper.convertDTOParaEntidade(dto);
+		Aluno aluno = new AlunoMapper().convertDTOParaEntidade(dto);
 		aluno = service.insert(aluno);
-		AlunoDTO response = AlunoMapper.convertEntidadeParaDTO(aluno);
+		AlunoDTO response = new AlunoMapper().convertEntidadeParaDTO(aluno);
 		return ResponseEntity.ok().body(response);
 	}
 
@@ -59,10 +59,11 @@ public class AlunoResource {
 	@PutMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<AlunoDTO> update(@PathVariable Integer id, @RequestBody AlunoDTO dto) {
-		Aluno aluno = AlunoMapper.convertDTOParaEntidade(dto);
+		AlunoMapper alunoMapper = new AlunoMapper();
+		Aluno aluno = alunoMapper.convertDTOParaEntidade(dto);
 		aluno.setIdaluno(id);
 		aluno = service.update(id, aluno);
-		AlunoDTO response = AlunoMapper.convertEntidadeParaDTO(aluno);
+		AlunoDTO response = alunoMapper.convertEntidadeParaDTO(aluno);
 		return ResponseEntity.ok().body(response);
 	}
 }

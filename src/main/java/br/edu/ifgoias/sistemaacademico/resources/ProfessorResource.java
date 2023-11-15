@@ -1,8 +1,6 @@
 package br.edu.ifgoias.sistemaacademico.resources;
 
-import br.edu.ifgoias.sistemaacademico.entities.DefaultEntitie;
 import br.edu.ifgoias.sistemaacademico.entities.Professor;
-import br.edu.ifgoias.sistemaacademico.services.AlunoService;
 import br.edu.ifgoias.sistemaacademico.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

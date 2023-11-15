@@ -72,7 +72,7 @@ class AlunoResourceTest {
         // Given
         AlunoDTO alunoToInsert = new AlunoDTO("New Aluno", "M", new Date());
         Aluno expectedAluno = new Aluno("New Aluno", "M", new Date());
-        AlunoDTO expectedAlunoDTO = AlunoMapper.convertEntidadeParaDTO(expectedAluno);
+        AlunoDTO expectedAlunoDTO = new AlunoMapper().convertEntidadeParaDTO(expectedAluno);
 
         given(alunoService.insert(any(Aluno.class))).willReturn(expectedAluno);
 
@@ -91,7 +91,7 @@ class AlunoResourceTest {
         int existingId = 10;
         AlunoDTO alunoToUpdate = new AlunoDTO(existingId, "Updated Aluno", "M", new Date());
         Aluno updatedAluno = new Aluno(existingId, "Updated Aluno", "M", new Date());
-        AlunoDTO updatedAlunoDTO = AlunoMapper.convertEntidadeParaDTO(updatedAluno);
+        AlunoDTO updatedAlunoDTO = new AlunoMapper().convertEntidadeParaDTO(updatedAluno);
 
         given(alunoService.update(eq(existingId), any(Aluno.class))).willReturn(updatedAluno);
 
