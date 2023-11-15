@@ -1,0 +1,6 @@
+<FindBugsFilter>
+    <Match>
+        <Method name="&lt;init&gt;"/>
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+</FindBugsFilter>

@@ -84,19 +84,19 @@ public class Aluno implements Serializable{
 	}
 
 	public Date getDtNasc() {
-		return dtNasc;
+		return new Date(dtNasc.getTime());
 	}
 
 	public void setDtNasc(Date dtNasc) {
-		this.dtNasc = dtNasc;
+		this.dtNasc = new Date(dtNasc.getTime());
 	}
 
 	public List<Curso> getCursos() {
-		return cursos;
+		return new ArrayList<>(cursos);
 	}
 
 	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
+		this.cursos = new ArrayList<>(cursos);
 	}
 
 	@Override
