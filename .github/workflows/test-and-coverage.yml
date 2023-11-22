@@ -35,11 +35,11 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: my-custom-directory
+          projectBaseDir: ./
           args: >
             -Dsonar.organization=my-organization
             -Dsonar.projectKey=my-projectkey
-            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.java.coverage.reportPaths=coverage.xml
             -Dsonar.sources=lib/
             -Dsonar.test.exclusions=tests/**
             -Dsonar.tests=tests/
