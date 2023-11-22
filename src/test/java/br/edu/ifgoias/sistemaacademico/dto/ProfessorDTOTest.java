@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProfessorDTOTest {
 
     @Test
-    public void givenConstructorWithId_whenCreatingObject_thenCorrectlyInitialized() {
+    void givenConstructorWithId_whenCreatingObject_thenCorrectlyInitialized() {
         // Given
         Integer id = 1;
         String nome = "Prof. Octavio";
@@ -23,7 +23,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenConstructorWithoutId_whenCreatingObject_thenCorrectlyInitialized() {
+    void givenConstructorWithoutId_whenCreatingObject_thenCorrectlyInitialized() {
         // Given
         String nome = "Prof. Dory";
         String titulacao = "Mestre";
@@ -38,7 +38,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenTwoEqualObjects_whenCheckingEquality_thenShouldBeEqual() {
+    void givenTwoEqualObjects_whenCheckingEquality_thenShouldBeEqual() {
         // Given
         ProfessorDTO professor1 = new ProfessorDTO(2, "Prof. Raphael", "PhD");
         ProfessorDTO professor2 = new ProfessorDTO(2, "Prof. Raphael", "PhD");
@@ -51,7 +51,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenTwoDifferentObjects_whenCheckingEquality_thenShouldNotBeEqual() {
+    void givenTwoDifferentObjects_whenCheckingEquality_thenShouldNotBeEqual() {
         // Given
         ProfessorDTO professor1 = new ProfessorDTO(3, "Prof. Octavio", "Doutor");
         ProfessorDTO professor2 = new ProfessorDTO(4, "Prof. Dory", "Mestre");
@@ -64,7 +64,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenTwoEqualObjects_whenComparingHashCodes_thenShouldBeEqual() {
+    void givenTwoEqualObjects_whenComparingHashCodes_thenShouldBeEqual() {
         // Given
         ProfessorDTO professor1 = new ProfessorDTO(5, "Prof. Raphael", "PhD");
         ProfessorDTO professor2 = new ProfessorDTO(5, "Prof. Raphael", "PhD");
@@ -78,7 +78,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenSameObject_whenCheckingEquality_thenShouldBeEqual() {
+    void givenSameObject_whenCheckingEquality_thenShouldBeEqual() {
         // Given
         ProfessorDTO professor = new ProfessorDTO(1, "Prof. Octavio", "Doutor");
 
@@ -90,7 +90,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenNull_whenCheckingEquality_thenShouldNotBeEqual() {
+    void givenNull_whenCheckingEquality_thenShouldNotBeEqual() {
         // Given
         ProfessorDTO professor = new ProfessorDTO(2, "Prof. Raphael", "PhD");
 
@@ -102,7 +102,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenDifferentClassObject_whenCheckingEquality_thenShouldNotBeEqual() {
+    void givenDifferentClassObject_whenCheckingEquality_thenShouldNotBeEqual() {
         // Given
         ProfessorDTO professor = new ProfessorDTO(3, "Prof. Raphael", "Doutor");
         Object otherObject = new Object();
@@ -115,7 +115,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenDifferentNameOrTitulacao_whenCheckingEquality_thenShouldNotBeEqual() {
+    void givenDifferentNameOrTitulacao_whenCheckingEquality_thenShouldNotBeEqual() {
         // Given
         ProfessorDTO professor1 = new ProfessorDTO(4, "Prof. Raphael", "Mestre");
         ProfessorDTO professor2 = new ProfessorDTO(4, "Prof. Raphael", "Doutor");
@@ -131,7 +131,7 @@ class ProfessorDTOTest {
     }
 
     @Test
-    public void givenDefaultConstructor_whenCreatingObject_thenFieldsShouldBeNull() {
+    void givenDefaultConstructor_whenCreatingObject_thenFieldsShouldBeNull() {
         // When
         ProfessorDTO professor = new ProfessorDTO();
 

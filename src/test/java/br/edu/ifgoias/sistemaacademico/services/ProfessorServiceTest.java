@@ -28,12 +28,12 @@ class ProfessorServiceTest {
     private ProfessorService service;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void whenFindAll_thenReturnsList() {
+    void whenFindAll_thenReturnsList() {
         // Given
         List<Professor> expectedProfessors = Arrays.asList(new Professor(), new Professor());
         when(repository.findAll()).thenReturn(expectedProfessors);
@@ -46,7 +46,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenFindById_thenReturnsProfessor() {
+    void whenFindById_thenReturnsProfessor() {
         // Given
         Professor expectedProfessor = new Professor();
         Integer id = 1;
@@ -60,7 +60,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenFindById_NotFound_thenThrowsException() {
+    void whenFindById_NotFound_thenThrowsException() {
         // Given
         Integer id = 1;
         when(repository.findById(id)).thenReturn(Optional.empty());
@@ -70,7 +70,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenInsert_thenReturnsProfessor() {
+    void whenInsert_thenReturnsProfessor() {
         // Given
         Professor newProfessor = new Professor();
         when(repository.save(newProfessor)).thenReturn(newProfessor);
@@ -83,7 +83,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenUpdate_ExistingId_thenReturnsUpdatedProfessor() {
+    void whenUpdate_ExistingId_thenReturnsUpdatedProfessor() {
         // Given
         Integer id = 1;
         Professor existingProfessor = new Professor();
@@ -104,7 +104,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenUpdate_NonExistingId_thenThrowsException() {
+    void whenUpdate_NonExistingId_thenThrowsException() {
         // Given
         Integer id = 1;
         Professor updatedInfo = new Professor();
@@ -115,7 +115,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenDelete_ExistingId_thenPerformsDeletion() {
+    void whenDelete_ExistingId_thenPerformsDeletion() {
         // Given
         Integer id = 1;
         Professor existingProfessor = new Professor();
@@ -131,7 +131,7 @@ class ProfessorServiceTest {
     }
 
     @Test
-    public void whenDelete_NonExistingId_thenThrowsException() {
+    void whenDelete_NonExistingId_thenThrowsException() {
         // Given
         Integer id = 1;
         when(repository.findById(id)).thenReturn(Optional.empty());

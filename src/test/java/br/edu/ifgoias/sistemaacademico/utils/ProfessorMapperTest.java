@@ -7,12 +7,12 @@ import br.edu.ifgoias.sistemaacademico.entities.Professor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ProfessorMapperTest {
+class ProfessorMapperTest {
 
     private final ProfessorMapper mapper = new ProfessorMapper();
 
     @Test
-    public void givenProfessorDTO_whenConvertDTOParaEntidade_thenCorrect() {
+    void givenProfessorDTO_whenConvertDTOParaEntidade_thenCorrect() {
         // Given
         ProfessorDTO dto = new ProfessorDTO(1, "Prof. Octavio", "Doutor");
 
@@ -27,7 +27,7 @@ public class ProfessorMapperTest {
     }
 
     @Test
-    public void givenProfessorEntity_whenConvertEntidadeParaDTO_thenCorrect() {
+    void givenProfessorEntity_whenConvertEntidadeParaDTO_thenCorrect() {
         // Given
         Professor entity = new Professor(2, "Prof. Dory", "Mestre");
 
