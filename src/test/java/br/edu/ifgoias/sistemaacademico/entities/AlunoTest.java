@@ -116,6 +116,14 @@ class AlunoTest {
     }
 
     @Test
+    void whenEqualsCalledWithNullAndNonNullDtNasc_thenFalse(){
+      Aluno aluno1 = new Aluno(1, "Aluno 1", "M", null);
+      Aluno aluno2 = new Aluno(2, "Aluno 2", "M", new Date());
+
+      assertFalse(aluno1.equals(aluno2));
+    }
+
+    @Test
     void whenHashCodeCalled_thenCorrectHashCodeReturned() {
         // Given
         Aluno aluno1 = new Aluno(1, "Aluno 1", "M", new Date());

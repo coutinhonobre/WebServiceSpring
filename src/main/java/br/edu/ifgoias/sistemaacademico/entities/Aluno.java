@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
+import java.util.logging.Level;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +22,8 @@ import javax.persistence.ManyToMany;
 public class Aluno implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+  private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Aluno.class.getName());
  
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -40,7 +46,7 @@ public class Aluno implements Serializable{
 		this.idaluno = idaluno;
 		this.nome = nome;
 		this.sexo = sexo;
-		this.dtNasc = new Date(dtNasc.getTime());
+		this.dtNasc = (dtNasc != null) ? new Date(dtNasc.getTime()): null;
 	}
 
 	public Aluno(String nome, String sexo, Date dtNasc) {
@@ -113,42 +119,53 @@ public class Aluno implements Serializable{
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (dtNasc == null) {
-			if (other.dtNasc != null)
-				return false;
-		} else if (!dtNasc.equals(other.dtNasc))
-			return false;
-		if (idaluno == null) {
-			if (other.idaluno != null)
-				return false;
-		} else if (!idaluno.equals(other.idaluno))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (sexo == null) {
-			if (other.sexo != null)
-				return false;
-		} else if (!sexo.equals(other.sexo))
-			return false;
-		return true;
-	}
+  @Override
+  public boolean equals(Object obj) {
+      if (this == obj)
+          return true;
+      if (obj == null || getClass() != obj.getClass())
+          return false;
+      Aluno other = (Aluno) obj;
+      return compareFields(other, Arrays.asList("idaluno", "nome", "sexo", "dtNasc"));
+  }
 
 	@Override
 	public String toString() {
 		return "Aluno [idaluno=" + idaluno + ", nome=" + nome + ", sexo=" + sexo + ", dt_nasc=" + dtNasc + ", cursos="
 				+ cursos + "]";
 	}
+
+  private boolean compareFields(Aluno other, List<String> fieldsToCompare) {
+      Map<String, Object> thisFields = new HashMap<>();
+      Map<String, Object> otherFields = new HashMap<>();
+
+      for (String fieldName : fieldsToCompare) {
+          try {
+              thisFields.put(fieldName, this.getClass().getDeclaredField(fieldName).get(this));
+          } catch (Exception e) {
+              LOGGER.log(Level.SEVERE, "Error accessing field of first objetc ->  " + fieldName, e);
+              return false;
+          }
+      }
+      for (String fieldName : fieldsToCompare) {
+          try {
+              otherFields.put(fieldName, other.getClass().getDeclaredField(fieldName).get(other));
+          } catch (Exception e) {
+              LOGGER.log(Level.SEVERE, "Error accessing field of secon object -> " + fieldName, e);
+              return false;
+          }
+      }
+      for (String fieldName : fieldsToCompare) {
+          Object thisFieldValue = thisFields.get(fieldName);
+          Object otherFieldValue = otherFields.get(fieldName);
+          if (thisFieldValue == null && otherFieldValue == null) {
+              continue;
+          }
+          if (thisFieldValue == null || !thisFieldValue.equals(otherFieldValue)) {
+              return false;
+          }
+      }
+      return true;
+  }
 	
 }
