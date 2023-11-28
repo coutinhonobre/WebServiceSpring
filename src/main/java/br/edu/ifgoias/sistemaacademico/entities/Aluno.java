@@ -84,7 +84,10 @@ public class Aluno implements Serializable{
 	}
 
 	public Date getDtNasc() {
-		return new Date(dtNasc.getTime());
+		if (this.dtNasc == null) {
+			return null;
+		}
+		return new Date(this.dtNasc.getTime());
 	}
 
 	public void setDtNasc(Date dtNasc) {

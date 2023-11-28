@@ -40,6 +40,10 @@ public class Curso  implements Serializable{
 		this.nomecurso = nomecurso;
 	}
 
+	public Curso() {
+
+	}
+
 	
 	public void adicionarAluno(Aluno a) {
 		this.alunos.add(a);
