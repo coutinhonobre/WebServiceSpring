@@ -5,10 +5,10 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: admin
       POSTGRES_DB: WS
     ports:
-      - "5432:5432"
+      - "5433:5432"
   app:
     build:
       context: .
