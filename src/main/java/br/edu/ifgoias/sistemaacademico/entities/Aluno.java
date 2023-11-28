@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,8 @@ import javax.persistence.ManyToMany;
 public class Aluno implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+  private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Aluno.class.getName());
  
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -140,14 +143,16 @@ public class Aluno implements Serializable{
           try {
               thisFields.put(fieldName, this.getClass().getDeclaredField(fieldName).get(this));
           } catch (Exception e) {
-              e.printStackTrace();
+              LOGGER.log(Level.SEVERE, "Error accessing field of first objetc ->  " + fieldName, e);
+              return false;
           }
       }
       for (String fieldName : fieldsToCompare) {
           try {
               otherFields.put(fieldName, other.getClass().getDeclaredField(fieldName).get(other));
           } catch (Exception e) {
-              e.printStackTrace();
+              LOGGER.log(Level.SEVERE, "Error accessing field of secon object -> " + fieldName, e);
+              return false;
           }
       }
       for (String fieldName : fieldsToCompare) {
