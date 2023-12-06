@@ -44,3 +44,11 @@ jobs:
         with:
           name: jmeter-test-results-other
           path: other_reports/
+
+      - name: Upload JMeter Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-results
+          path: |
+            summary_report.csv
+            another_result_file.csv
