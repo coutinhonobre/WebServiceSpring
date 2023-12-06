@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Create Report Directory
+        run: mkdir -p other_reports/
+
       - name: Run JMeter Action on a test
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
