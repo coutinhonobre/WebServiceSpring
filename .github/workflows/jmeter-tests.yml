@@ -56,5 +56,5 @@ jobs:
       - name: Summarize JMeter Test Results
         run: |
           echo "Sumário dos Resultados do Teste:"
-          [ -f reports/summary_report.csv ] && awk -F',' '{if(NR>1)print "Tempo de Resposta: "$2" ms, Status: "$4}' reports/summary_report.csv || echo "Nenhum relatório encontrado em reports/summary_report.csv"
+          [ -f tests/summary_report.csv ] && awk -F',' '{if(NR>1)print "Tempo de Resposta: "$2" ms, Status: "$4}' reports/summary_report.csv || echo "Nenhum relatório encontrado em reports/summary_report.csv"
           [ -f other_reports/another_result_file.csv ] && awk -F',' '{if(NR>1)print "Tempo de Resposta: "$2" ms, Status: "$4}' other_reports/another_result_file.csv || echo "Nenhum relatório encontrado em other_reports/another_result_file.csv"
