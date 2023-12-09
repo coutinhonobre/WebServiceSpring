@@ -60,19 +60,19 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const pr_number = github.context.payload.pull_request.number;
-            const fs = require('fs');
+            if (github.context.payload && github.context.payload.pull_request) {
+              const pr_number = github.context.payload.pull_request.number;
+              const fs = require('fs');
+            
+              const jmeterResults = fs.readFileSync('./jmeter/results.xml', 'utf-8');
 
-            const jmeterResults = fs.readFileSync('./jmeter/results.xml', 'utf-8');
-
-            // Comentar no PR com os resultados em formato XML
-            github.rest.issues.createComment({
-              owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
-              issue_number: pr_number,
-              body: "Resultados dos testes do JMeter em formato XML:\n\n```\n" + jmeterResults + "\n```"
-            });
-      
+              github.rest.issues.createComment({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                issue_number: pr_number,
+                body: "Resultados dos testes do JMeter em formato XML:\n\n```\n" + jmeterResults + "\n```"
+              });
+            }
       
 
       - name: Stop Spring Boot App
