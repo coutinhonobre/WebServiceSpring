@@ -47,4 +47,8 @@ jobs:
 
       - name: Stop Spring Boot App
         run: |
-          kill $SPRING_PID
+          if [ -n "$SPRING_PID" ]; then
+            kill $SPRING_PID || echo "Spring Boot app was not running."
+          else
+            echo "No PID found for Spring Boot app."
+          fi
