@@ -54,8 +54,8 @@ jobs:
         run: |
           python ./jmeter/analyze_jmeter_results.py
 
-      - name: Add comment to PR with JMeter results
-        if: github.event_name == 'pull_request'
+      - name: Add comment to PR with JMeter XML results
+        if: always()
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -65,14 +65,14 @@ jobs:
 
             const jmeterResults = fs.readFileSync('./jmeter/results.xml', 'utf-8');
 
-            // Comentar no PR com os resultados dos testes
-            const message = "Resultados dos testes do JMeter:\n\n```\n" + jmeterResults + "\n```";
+            // Comentar no PR com os resultados em formato XML
             github.rest.issues.createComment({
               owner: github.context.repo.owner,
               repo: github.context.repo.repo,
               issue_number: pr_number,
-              body: message
+              body: "Resultados dos testes do JMeter em formato XML:\n\n```\n" + jmeterResults + "\n```"
             });
+      
       
 
       - name: Stop Spring Boot App
