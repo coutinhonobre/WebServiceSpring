@@ -31,7 +31,9 @@ jobs:
         run: |
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.2.tgz
           tar -xzf apache-jmeter-5.6.2.tgz
-          export PATH=$PATH:`pwd`/apache-jmeter-5.6.2/bin
+          echo "JMETER_HOME=$PWD/apache-jmeter-5.6.2" >> $GITHUB_ENV
+          echo "$PWD/apache-jmeter-5.6.2/bin" >> $GITHUB_PATH
+      
 
       - name: Start Spring Boot App
         run: |
