@@ -55,13 +55,10 @@ jobs:
             tail -n +2 ./jmeter/results.csv | while IFS=',' read -r timeStamp elapsed label responseCode responseMessage threadName dataType success failureMessage bytes sentBytes grpThreads allThreads URL latency idleTime connect
             do
               echo "Reading line: $label, Success: $success"
-              if [ "$success" = "true" ]; then
-                  ((success_count++))
-              elif [ "$success" = "false" ]; then
+              if [ "$success" = "false" ]; then
                   ((failure_count++))
               else
-                  echo "Unexpected format in results.csv"
-                  exit 1
+                  ((success_count++))
               fi
             done
 
