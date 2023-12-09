@@ -45,6 +45,35 @@ jobs:
         run: |
           jmeter -n -t ./jmeter/academico.jmx -l ./jmeter/results.csv
 
+      - name: Analyze JMeter Results
+        run: |
+          if [ -f ./jmeter/results.csv ]; then
+            echo "Analyzing JMeter results..."
+            success_count=0
+            failure_count=0
+
+            while IFS=',' read -r timeStamp elapsed label responseCode responseMessage threadName dataType success failureMessage bytes sentBytes grpThreads allThreads URL latency idleTime connect
+            do
+              if [ "$success" = "true" ]; then
+                  ((success_count++))
+              else
+                  ((failure_count++))
+              fi
+            done < ./jmeter/results.csv
+
+            echo "Análise dos Resultados do JMeter:"
+            echo "Testes bem-sucedidos: $success_count"
+            echo "Testes com falha: $failure_count"
+
+            if [ $failure_count -ne 0 ]; then
+              echo "Foram encontradas falhas nos testes. Verifique os logs para mais detalhes."
+              exit 1
+            fi
+          else
+            echo "JMeter results file not found."
+            exit 1
+          fi    
+
       - name: Stop Spring Boot App
         run: |
           if [ -n "$SPRING_PID" ]; then
