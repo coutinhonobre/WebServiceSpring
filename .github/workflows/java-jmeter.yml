@@ -55,7 +55,7 @@ jobs:
           python ./jmeter/analyze_jmeter_results.py
 
       - name: Add comment to PR with JMeter results
-        if: always()
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -73,6 +73,7 @@ jobs:
               issue_number: pr_number,
               body: message
             });
+      
 
       - name: Stop Spring Boot App
         run: |
