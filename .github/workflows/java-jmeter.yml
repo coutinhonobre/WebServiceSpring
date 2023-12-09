@@ -51,7 +51,7 @@ jobs:
             echo "Analyzing JMeter results..."
             success_count=0
             failure_count=0
-
+      
             while IFS=',' read -r timeStamp elapsed label responseCode responseMessage threadName dataType success failureMessage bytes sentBytes grpThreads allThreads URL latency idleTime connect
             do
               if [ "$success" = "true" ]; then
@@ -60,11 +60,11 @@ jobs:
                   ((failure_count++))
               fi
             done < ./jmeter/results.csv
-
+      
             echo "Análise dos Resultados do JMeter:"
             echo "Testes bem-sucedidos: $success_count"
             echo "Testes com falha: $failure_count"
-
+      
             if [ $failure_count -ne 0 ]; then
               echo "Foram encontradas falhas nos testes. Verifique os logs para mais detalhes."
               exit 1
@@ -72,7 +72,8 @@ jobs:
           else
             echo "JMeter results file not found."
             exit 1
-          fi    
+          fi
+          
 
       - name: Stop Spring Boot App
         run: |
