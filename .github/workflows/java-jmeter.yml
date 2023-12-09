@@ -43,41 +43,16 @@ jobs:
 
       - name: Run JMeter Tests
         run: |
-          jmeter -n -t ./jmeter/academico.jmx -l ./jmeter/results.csv
+          jmeter -Jjmeter.save.saveservice.output_format=xml -n -t ./jmeter/academico.jmx -l ./jmeter/results.xml
 
-      - name: Analyze JMeter Results
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Analyze JMeter XML Results
         run: |
-          if [ -f ./jmeter/results.csv ]; then
-            echo "Analyzing JMeter results..."
-            success_count=0
-            failure_count=0
-      
-            tail -n +2 ./jmeter/results.csv | while IFS=',' read -r timeStamp elapsed label responseCode responseMessage threadName dataType success failureMessage bytes sentBytes grpThreads allThreads URL latency idleTime connect
-            do
-              echo "Reading line: $label, Success: $success"
-              if [[ "$success" == "true" ]]; then
-                  ((success_count++))
-              elif [[ "$success" == "false" ]]; then
-                  ((failure_count++))
-              else
-                  echo "Unexpected value in 'success' field: $success"
-                  exit 1
-              fi
-            done
-      
-            echo "Análise dos Resultados do JMeter:"
-            echo "Testes bem-sucedidos: $success_count"
-            echo "Testes com falha: $failure_count"
-      
-            if [ $failure_count -ne 0 ]; then
-              echo "Foram encontradas falhas nos testes."
-              exit 1
-            fi
-          else
-            echo "JMeter results file not found."
-            exit 1
-          fi
-
+          python ./analyze_jmeter_results.py
 
       - name: Stop Spring Boot App
         run: |
