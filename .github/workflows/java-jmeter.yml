@@ -54,27 +54,6 @@ jobs:
         run: |
           python ./jmeter/analyze_jmeter_results.py
 
-      - name: Add comment to PR with JMeter XML results
-        if: always()
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            if (github.context.payload && github.context.payload.pull_request) {
-              const pr_number = github.context.payload.pull_request.number;
-              const fs = require('fs');
-            
-              const jmeterResults = fs.readFileSync('./jmeter/results.xml', 'utf-8');
-
-              github.rest.issues.createComment({
-                owner: github.context.repo.owner,
-                repo: github.context.repo.repo,
-                issue_number: pr_number,
-                body: "Resultados dos testes do JMeter em formato XML:\n\n```\n" + jmeterResults + "\n```"
-              });
-            }
-      
-
       - name: Stop Spring Boot App
         run: |
           if [ -n "$SPRING_PID" ]; then
