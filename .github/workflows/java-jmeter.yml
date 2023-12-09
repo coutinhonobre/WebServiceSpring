@@ -52,7 +52,7 @@ jobs:
 
       - name: Analyze JMeter XML Results
         run: |
-          python ./analyze_jmeter_results.py
+          python ./jmeter/analyze_jmeter_results.py
 
       - name: Stop Spring Boot App
         run: |
