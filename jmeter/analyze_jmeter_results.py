@@ -27,4 +27,4 @@ def analyze_jmeter_results(file_path):
         exit(1)
 
 if __name__ == "__main__":
-    analyze_jmeter_results('results.xml')
+    analyze_jmeter_results('./jmeter/results.xml')
