@@ -1,0 +1,48 @@
+name: Java CI with JMeter
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+    branches:
+      - main
+      - develop
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: '16'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Install JMeter
+        run: |
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.2.tgz
+          tar -xzf apache-jmeter-5.6.2.tgz
+          export PATH=$PATH:`pwd`/apache-jmeter-5.6.2/bin
+
+      - name: Start Spring Boot App
+        run: |
+          mvn spring-boot:run -Dspring-boot.run.profiles=test &
+          SPRING_PID=$!
+          sleep 10
+
+      - name: Run JMeter Tests
+        run: |
+          jmeter -n -t ./jmeter/academico.jmx -l ./jmeter/results.csv
+
+      - name: Stop Spring Boot App
+        run: |
+          kill $SPRING_PID
