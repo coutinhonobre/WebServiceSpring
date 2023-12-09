@@ -143,7 +143,8 @@ public class Aluno implements Serializable{
           try {
               thisFields.put(fieldName, this.getClass().getDeclaredField(fieldName).get(this));
           } catch (Exception e) {
-              LOGGER.log(Level.SEVERE, "Error accessing field of first objetc ->  " + fieldName, e);
+			  String logMessage = String.format("Error accessing field of first objetc ->  %s", fieldName);
+              LOGGER.log(Level.SEVERE, logMessage, e);
               return false;
           }
       }
@@ -151,7 +152,8 @@ public class Aluno implements Serializable{
           try {
               otherFields.put(fieldName, other.getClass().getDeclaredField(fieldName).get(other));
           } catch (Exception e) {
-              LOGGER.log(Level.SEVERE, "Error accessing field of secon object -> " + fieldName, e);
+			  String logMessage = String.format("Error accessing field of second object -> %s", fieldName);
+              LOGGER.log(Level.SEVERE, logMessage, e);
               return false;
           }
       }
