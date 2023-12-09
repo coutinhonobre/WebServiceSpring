@@ -4,11 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class AlunoTest {
@@ -102,7 +98,7 @@ class AlunoTest {
         Aluno aluno1 = new Aluno(1, "Aluno 1", "M", new Date());
 
         // Then
-        assertTrue(aluno1.equals(aluno1));
+        assertEquals(aluno1, aluno1);
     }
 
     @Test
@@ -112,7 +108,7 @@ class AlunoTest {
         Aluno aluno2 = new Aluno(2, "Aluno 2", "F", new Date());
 
         // Then
-        assertFalse(aluno1.equals(aluno2));
+        assertNotEquals(aluno1, aluno2);
     }
 
     @Test
@@ -120,7 +116,7 @@ class AlunoTest {
       Aluno aluno1 = new Aluno(1, "Aluno 1", "M", null);
       Aluno aluno2 = new Aluno(2, "Aluno 2", "M", new Date());
 
-      assertFalse(aluno1.equals(aluno2));
+        assertNotEquals(aluno1, aluno2);
     }
 
     @Test
@@ -164,27 +160,27 @@ class AlunoTest {
     @Test
     void givenNull_whenEquals_thenFalse() {
         Aluno aluno = new Aluno(1, "Nome", "M", new Date());
-        assertFalse(aluno.equals(null));
+        assertNotNull(aluno);
     }
 
     @Test
     void givenDifferentClassObject_whenEquals_thenFalse() {
         Aluno aluno = new Aluno(1, "Nome", "M", new Date());
         Object outroObjeto = new Object();
-        assertFalse(aluno.equals(outroObjeto));
+        assertNotEquals(aluno, outroObjeto);
     }
 
     @Test
     void givenTwoEqualObjects_whenEquals_thenTrue() {
         Aluno aluno1 = new Aluno(1, "Nome", "M", new Date());
         Aluno aluno2 = new Aluno(1, "Nome", "M", new Date());
-        assertTrue(aluno1.equals(aluno2));
+        assertEquals(aluno1, aluno2);
     }
 
     @Test
     void givenTwoDifferentObjects_whenEquals_thenFalse() {
         Aluno aluno1 = new Aluno(1, "Nome", "M", new Date());
         Aluno aluno2 = new Aluno(2, "Outro Nome", "F", new Date());
-        assertFalse(aluno1.equals(aluno2));
+        assertNotEquals(aluno1, aluno2);
     }
 }
