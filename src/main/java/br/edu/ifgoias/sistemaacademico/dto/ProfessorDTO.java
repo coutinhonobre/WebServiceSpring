@@ -37,7 +37,9 @@ public class ProfessorDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
+
         ProfessorDTO professorDTO = (ProfessorDTO) o;
         return Objects.equals(idProfessor, professorDTO.idProfessor) &&
                 Objects.equals(nome, professorDTO.nome) &&

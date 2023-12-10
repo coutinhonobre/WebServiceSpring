@@ -112,10 +112,12 @@ public class Aluno implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+
 		result = prime * result + ((dtNasc == null) ? 0 : dtNasc.hashCode());
 		result = prime * result + ((idaluno == null) ? 0 : idaluno.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+
 		return result;
 	}
 
@@ -123,8 +125,10 @@ public class Aluno implements Serializable{
   public boolean equals(Object obj) {
       if (this == obj)
           return true;
+
       if (obj == null || getClass() != obj.getClass())
           return false;
+
       Aluno other = (Aluno) obj;
       return compareFields(other, Arrays.asList("idaluno", "nome", "sexo", "dtNasc"));
   }
@@ -157,12 +161,15 @@ public class Aluno implements Serializable{
               return false;
           }
       }
+
       for (String fieldName : fieldsToCompare) {
           Object thisFieldValue = thisFields.get(fieldName);
           Object otherFieldValue = otherFields.get(fieldName);
+
           if (thisFieldValue == null && otherFieldValue == null) {
               continue;
           }
+
           if (thisFieldValue == null || !thisFieldValue.equals(otherFieldValue)) {
               return false;
           }

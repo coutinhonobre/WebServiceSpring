@@ -10,7 +10,7 @@ public class AlunoDTO {
     private Integer idaluno;
     private String nome;
     private String sexo;
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @JsonProperty("dt_nasc")
     private Date dtNasc;
 
@@ -50,7 +50,9 @@ public class AlunoDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
+
         AlunoDTO alunoDTO = (AlunoDTO) o;
         return Objects.equals(idaluno, alunoDTO.idaluno) &&
                 Objects.equals(nome, alunoDTO.nome) &&
