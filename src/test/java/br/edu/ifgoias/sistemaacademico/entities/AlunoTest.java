@@ -183,4 +183,23 @@ class AlunoTest {
         Aluno aluno2 = new Aluno(2, "Outro Nome", "F", new Date());
         assertNotEquals(aluno1, aluno2);
     }
+
+    @Test
+    void whenEqualsCalledWithDifferentClassObject_thenFalse() {
+        // Given
+        Aluno aluno = new Aluno(1, "Aluno 1", "M", new Date());
+        Object outroObjeto = new Object();
+
+        // Then
+        assertNotEquals(aluno, outroObjeto);
+    }
+
+    @Test
+    void whenEqualsCalledWithNullObject_thenFalse() {
+        // Given
+        Aluno aluno = new Aluno(1, "Aluno 1", "M", new Date());
+
+        // Then
+        assertNotNull(aluno);
+    }
 }
