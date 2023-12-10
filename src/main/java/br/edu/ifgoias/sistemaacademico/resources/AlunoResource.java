@@ -64,9 +64,11 @@ public class AlunoResource {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<AlunoDTO> update(@PathVariable Integer id, @RequestBody AlunoDTO dto) {
 		AlunoMapper alunoMapper = new AlunoMapper();
+
 		Aluno aluno = alunoMapper.convertDTOParaEntidade(dto);
 		aluno.setIdaluno(id);
 		aluno = service.update(id, aluno);
+
 		AlunoDTO response = alunoMapper.convertEntidadeParaDTO(aluno);
 		return ResponseEntity.ok().body(response);
 	}

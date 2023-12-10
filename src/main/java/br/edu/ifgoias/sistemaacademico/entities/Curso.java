@@ -43,7 +43,6 @@ public class Curso  implements Serializable{
 	public Curso() {
 
 	}
-
 	
 	public void adicionarAluno(Aluno a) {
 		this.alunos.add(a);
@@ -83,6 +82,7 @@ public class Curso  implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+
 		result = prime * result + ((idCurso == null) ? 0 : idCurso.hashCode());
 		result = prime * result + ((nomecurso == null) ? 0 : nomecurso.hashCode());
 		return result;
@@ -92,10 +92,13 @@ public class Curso  implements Serializable{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+
 		if (obj == null)
 			return false;
+
 		if (getClass() != obj.getClass())
 			return false;
+
 		Curso other = (Curso) obj;
 		if (idCurso == null) {
 			if (other.idCurso != null)

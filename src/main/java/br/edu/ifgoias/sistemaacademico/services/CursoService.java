@@ -35,7 +35,9 @@ public class CursoService {
 	public void delete (Integer id) {
 		repository.findById(id).ifPresentOrElse(
 				repository::delete,
-				() -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND); }
+				() -> {
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+				}
 		);
 	}
 	

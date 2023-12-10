@@ -40,6 +40,7 @@ public class ProfessorResource {
     public ResponseEntity<ProfessorDTO> insert(@RequestBody ProfessorDTO dto) {
         Professor professor = new ProfessorMapper().convertDTOParaEntidade(dto);
         professor = service.insert(professor);
+
         ProfessorDTO response = new ProfessorMapper().convertEntidadeParaDTO(professor);
         return ResponseEntity.ok().body(response);
     }
@@ -54,8 +55,10 @@ public class ProfessorResource {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProfessorDTO> update(@PathVariable Integer id, @RequestBody ProfessorDTO dto) {
         ProfessorMapper professorMapper = new ProfessorMapper();
+
         Professor professor = professorMapper.convertDTOParaEntidade(dto);
         professor = service.update(id, professor);
+
         ProfessorDTO response = professorMapper.convertEntidadeParaDTO(professor);
         return ResponseEntity.ok().body(response);
     }
