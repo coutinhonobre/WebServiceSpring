@@ -191,4 +191,45 @@ class AlunoDTOTest {
         assertNull(aluno.getNome());
     }
 
+    @Test
+    void givenSameIdDifferentNames_whenCheckingEquality_thenShouldNotBeEqual() {
+        // Given
+        AlunoDTO aluno1 = new AlunoDTO(1, "Aluno 1", "M", new Date());
+        AlunoDTO aluno2 = new AlunoDTO(1, "Aluno 2", "M", new Date());
+
+        // When
+        boolean isEqual = aluno1.equals(aluno2);
+
+        // Then
+        assertFalse(isEqual);
+    }
+
+    @Test
+    void givenSameIdDifferentSexos_whenCheckingEquality_thenShouldNotBeEqual() {
+        // Given
+        AlunoDTO aluno1 = new AlunoDTO(1, "Aluno 1", "M", new Date());
+        AlunoDTO aluno2 = new AlunoDTO(1, "Aluno 1", "F", new Date());
+
+        // When
+        boolean isEqual = aluno1.equals(aluno2);
+
+        // Then
+        assertFalse(isEqual);
+    }
+
+    @Test
+    void givenSameIdDifferentDtNasc_whenCheckingEquality_thenShouldNotBeEqual() {
+        // Given
+        Date dtNasc1 = new Date();
+        Date dtNasc2 = new Date(dtNasc1.getTime() + 100000); // uma data ligeiramente diferente
+
+        AlunoDTO aluno1 = new AlunoDTO(1, "Aluno 1", "M", dtNasc1);
+        AlunoDTO aluno2 = new AlunoDTO(1, "Aluno 1", "M", dtNasc2);
+
+        // When
+        boolean isEqual = aluno1.equals(aluno2);
+
+        // Then
+        assertFalse(isEqual);
+    }
 }
