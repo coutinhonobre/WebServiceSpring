@@ -221,7 +221,7 @@ class AlunoDTOTest {
     void givenSameIdDifferentDtNasc_whenCheckingEquality_thenShouldNotBeEqual() {
         // Given
         Date dtNasc1 = new Date();
-        Date dtNasc2 = new Date(dtNasc1.getTime() + 100000); // uma data ligeiramente diferente
+        Date dtNasc2 = new Date(dtNasc1.getTime() + 100000);
 
         AlunoDTO aluno1 = new AlunoDTO(1, "Aluno 1", "M", dtNasc1);
         AlunoDTO aluno2 = new AlunoDTO(1, "Aluno 1", "M", dtNasc2);
