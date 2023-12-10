@@ -133,4 +133,30 @@ class CursoDTOTest {
         assertNull(curso.getNomecurso());
     }
 
+    @Test
+    void givenSameIdAndName_whenCheckingEquality_thenShouldBeEqual() {
+        // Given
+        CursoDTO curso1 = new CursoDTO(1, "Engenharia");
+        CursoDTO curso2 = new CursoDTO(1, "Engenharia");
+
+        // When
+        boolean isEqual = curso1.equals(curso2);
+
+        // Then
+        assertTrue(isEqual);
+    }
+
+    @Test
+    void givenDifferentIdsSameName_whenCheckingEquality_thenShouldNotBeEqual() {
+        // Given
+        CursoDTO curso1 = new CursoDTO(1, "Engenharia");
+        CursoDTO curso2 = new CursoDTO(2, "Engenharia");
+
+        // When
+        boolean isEqual = curso1.equals(curso2);
+
+        // Then
+        assertFalse(isEqual);
+    }
+
 }
