@@ -60,7 +60,7 @@ public class Evento implements Serializable {
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.data = new Date(data.getTime());
     }
 
     public String getLocal() {
