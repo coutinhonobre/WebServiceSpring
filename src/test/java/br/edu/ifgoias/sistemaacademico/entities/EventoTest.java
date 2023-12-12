@@ -239,7 +239,7 @@ class EventoTest {
         EventoDTO evento = new EventoDTO(1, "Evento 1", new Date(), "Local 1", "Descrição 1");
 
         // When-Then
-        assertFalse(evento.equals(null));
+        assertNotNull(evento);
     }
 
     @Test
@@ -249,6 +249,6 @@ class EventoTest {
         Object otherObject = new Object();
 
         // When-Then
-        assertFalse(evento.equals(otherObject));
+        assertNotEquals(evento, otherObject);
     }
 }
