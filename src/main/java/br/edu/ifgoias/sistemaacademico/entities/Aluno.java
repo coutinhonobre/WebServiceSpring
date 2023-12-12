@@ -4,12 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Arrays;
+import java.util.*;
 import java.util.logging.Level;
 
 import javax.persistence.Entity;
@@ -139,42 +134,56 @@ public class Aluno implements Serializable{
 				+ cursos + "]";
 	}
 
-  private boolean compareFields(Aluno other, List<String> fieldsToCompare) {
-      Map<String, Object> thisFields = new HashMap<>();
-      Map<String, Object> otherFields = new HashMap<>();
+	private Map<String, Object> extractFieldValues(Object object, List<String> fields) {
+		Map<String, Object> fieldValues = new HashMap<>();
+		for (String fieldName : fields) {
+			try {
+				fieldValues.put(fieldName, object.getClass().getDeclaredField(fieldName).get(object));
+			} catch (Exception e) {
+				logError("Error accessing field", fieldName, e);
+				return Collections.emptyMap();
+			}
+		}
+		return fieldValues;
+	}
 
-      for (String fieldName : fieldsToCompare) {
-          try {
-              thisFields.put(fieldName, this.getClass().getDeclaredField(fieldName).get(this));
-          } catch (Exception e) {
-			  String logMessage = String.format("Error accessing field of first objetc ->  %s", fieldName);
-              LOGGER.log(Level.SEVERE, logMessage, e);
-              return false;
-          }
-      }
-      for (String fieldName : fieldsToCompare) {
-          try {
-              otherFields.put(fieldName, other.getClass().getDeclaredField(fieldName).get(other));
-          } catch (Exception e) {
-			  String logMessage = String.format("Error accessing field of second object -> %s", fieldName);
-              LOGGER.log(Level.SEVERE, logMessage, e);
-              return false;
-          }
-      }
 
-      for (String fieldName : fieldsToCompare) {
-          Object thisFieldValue = thisFields.get(fieldName);
-          Object otherFieldValue = otherFields.get(fieldName);
+	private boolean areBothFieldsNull(Object fieldValue1, Object fieldValue2) {
+		return fieldValue1 == null && fieldValue2 == null;
+	}
 
-          if (thisFieldValue == null && otherFieldValue == null) {
-              continue;
-          }
+	private boolean compareFieldValue(Map<String, Object> thisFields, Map<String, Object> otherFields, String fieldName) {
+		Object thisFieldValue = thisFields.get(fieldName);
+		Object otherFieldValue = otherFields.get(fieldName);
 
-          if (thisFieldValue == null || !thisFieldValue.equals(otherFieldValue)) {
-              return false;
-          }
-      }
-      return true;
-  }
-	
+		if (areBothFieldsNull(thisFieldValue, otherFieldValue)) {
+			return true;
+		}
+		return thisFieldValue != null && thisFieldValue.equals(otherFieldValue);
+	}
+
+	private void logError(String message, String fieldName, Exception e) {
+		String logMessage = String.format("%s -> %s", message, fieldName);
+		LOGGER.log(Level.SEVERE, logMessage, e);
+	}
+
+	private boolean areAnyFieldsNull(Map<String, Object> fields1, Map<String, Object> fields2) {
+		return fields1 == null || fields2 == null;
+	}
+
+	private boolean compareFields(Aluno other, List<String> fieldsToCompare) {
+		Map<String, Object> thisFields = extractFieldValues(this, fieldsToCompare);
+		Map<String, Object> otherFields = extractFieldValues(other, fieldsToCompare);
+
+		if (areAnyFieldsNull(thisFields, otherFields)) {
+			return false;
+		}
+
+		for (String fieldName : fieldsToCompare) {
+			if (!compareFieldValue(thisFields, otherFields, fieldName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
