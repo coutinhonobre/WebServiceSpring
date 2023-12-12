@@ -4,12 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Arrays;
+import java.util.*;
 import java.util.logging.Level;
 
 import javax.persistence.Entity;
@@ -146,11 +141,12 @@ public class Aluno implements Serializable{
 				fieldValues.put(fieldName, object.getClass().getDeclaredField(fieldName).get(object));
 			} catch (Exception e) {
 				logError("Error accessing field", fieldName, e);
-				return null;
+				return Collections.emptyMap();
 			}
 		}
 		return fieldValues;
 	}
+
 
 	private boolean areBothFieldsNull(Object fieldValue1, Object fieldValue2) {
 		return fieldValue1 == null && fieldValue2 == null;
