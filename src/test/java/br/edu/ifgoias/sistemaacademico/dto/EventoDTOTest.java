@@ -21,10 +21,10 @@ class EventoDTOTest {
 
         // Then
         assertEquals(idEvento, evento.getIdEvento());
-        assertEquals(nome, evento.getNome());
-        assertEquals(data, evento.getData());
-        assertEquals(local, evento.getLocal());
-        assertEquals(descricao, evento.getDescricao());
+        assertEquals(nome, evento.getNomeEvento());
+        assertEquals(data, evento.getDataEvento());
+        assertEquals(local, evento.getLocalEvento());
+        assertEquals(descricao, evento.getDescricaoEvento());
     }
 
     @Test
@@ -40,10 +40,10 @@ class EventoDTOTest {
 
         // Then
         assertNull(evento.getIdEvento());
-        assertEquals(nome, evento.getNome());
-        assertEquals(data, evento.getData());
-        assertEquals(local, evento.getLocal());
-        assertEquals(descricao, evento.getDescricao());
+        assertEquals(nome, evento.getNomeEvento());
+        assertEquals(data, evento.getDataEvento());
+        assertEquals(local, evento.getLocalEvento());
+        assertEquals(descricao, evento.getDescricaoEvento());
     }
 
     @Test
@@ -177,10 +177,10 @@ class EventoDTOTest {
 
         // Then
         assertNull(evento.getIdEvento());
-        assertNull(evento.getNome());
-        assertNull(evento.getData());
-        assertNull(evento.getLocal());
-        assertNull(evento.getDescricao());
+        assertNull(evento.getNomeEvento());
+        assertNull(evento.getDataEvento());
+        assertNull(evento.getLocalEvento());
+        assertNull(evento.getDescricaoEvento());
     }
 
     @Test
@@ -201,10 +201,10 @@ class EventoDTOTest {
         EventoDTO evento = new EventoDTO();
 
         // When
-        evento.setNome("Evento 1");
+        evento.setNomeEvento("Evento 1");
 
         // Then
-        assertEquals("Evento 1", evento.getNome());
+        assertEquals("Evento 1", evento.getNomeEvento());
     }
 
     @Test
@@ -214,10 +214,10 @@ class EventoDTOTest {
         Date data = new Date();
 
         // When
-        evento.setData(data);
+        evento.setDataEvento(data);
 
         // Then
-        assertEquals(data, evento.getData());
+        assertEquals(data, evento.getDataEvento());
     }
 
     @Test
@@ -226,10 +226,10 @@ class EventoDTOTest {
         EventoDTO evento = new EventoDTO();
 
         // When
-        evento.setLocal("Local 1");
+        evento.setLocalEvento("Local 1");
 
         // Then
-        assertEquals("Local 1", evento.getLocal());
+        assertEquals("Local 1", evento.getLocalEvento());
     }
 
     @Test
@@ -238,9 +238,9 @@ class EventoDTOTest {
         EventoDTO evento = new EventoDTO();
 
         // When
-        evento.setDescricao("Descrição 1");
+        evento.setDescricaoEvento("Descrição 1");
 
         // Then
-        assertEquals("Descrição 1", evento.getDescricao());
+        assertEquals("Descrição 1", evento.getDescricaoEvento());
     }
 }

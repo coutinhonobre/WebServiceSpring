@@ -7,29 +7,29 @@ import java.util.Objects;
 
 public class EventoDTO {
     private Integer idEvento;
-    private String nome;
+    private String nomeEvento;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date data;
-    private String local;
-    private String descricao;
+    private Date dataEvento;
+    private String localEvento;
+    private String descricaoEvento;
 
     public EventoDTO() {
 
     }
 
-    public EventoDTO(Integer idEvento, String nome, Date data, String local, String descricao) {
+    public EventoDTO(Integer idEvento, String nomeEvento, Date dataEvento, String localEvento, String descricaoEvento) {
         this.idEvento = idEvento;
-        this.nome = nome;
-        this.data = new Date(data.getTime());
-        this.local = local;
-        this.descricao = descricao;
+        this.nomeEvento = nomeEvento;
+        this.dataEvento = new Date(dataEvento.getTime());
+        this.localEvento = localEvento;
+        this.descricaoEvento = descricaoEvento;
     }
 
-    public EventoDTO(String nome, Date data, String local, String descricao) {
-        this.nome = nome;
-        this.data = new Date(data.getTime());
-        this.local = local;
-        this.descricao = descricao;
+    public EventoDTO(String nomeEvento, Date dataEvento, String localEvento, String descricaoEvento) {
+        this.nomeEvento = nomeEvento;
+        this.dataEvento = new Date(dataEvento.getTime());
+        this.localEvento = localEvento;
+        this.descricaoEvento = descricaoEvento;
     }
 
     public Integer getIdEvento() {
@@ -40,39 +40,39 @@ public class EventoDTO {
         this.idEvento = idEvento;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeEvento() {
+        return nomeEvento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
     }
 
-    public Date getData() {
-        if (data == null) {
+    public Date getDataEvento() {
+        if (dataEvento == null) {
             return null;
         }
-        return new Date(data.getTime());
+        return new Date(dataEvento.getTime());
     }
 
-    public void setData(Date data) {
-        this.data = new Date(data.getTime());
+    public void setDataEvento(Date dataEvento) {
+        this.dataEvento = new Date(dataEvento.getTime());
     }
 
-    public String getLocal() {
-        return local;
+    public String getLocalEvento() {
+        return localEvento;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setLocalEvento(String localEvento) {
+        this.localEvento = localEvento;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoEvento() {
+        return descricaoEvento;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoEvento(String descricaoEvento) {
+        this.descricaoEvento = descricaoEvento;
     }
 
     @Override
@@ -84,14 +84,14 @@ public class EventoDTO {
 
         EventoDTO eventoDTO = (EventoDTO) obj;
         return idEvento.equals(eventoDTO.idEvento) &&
-                nome.equals(eventoDTO.nome) &&
-                data.equals(eventoDTO.data) &&
-                local.equals(eventoDTO.local) &&
-                descricao.equals(eventoDTO.descricao);
+                nomeEvento.equals(eventoDTO.nomeEvento) &&
+                dataEvento.equals(eventoDTO.dataEvento) &&
+                localEvento.equals(eventoDTO.localEvento) &&
+                descricaoEvento.equals(eventoDTO.descricaoEvento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEvento, nome, data, local, descricao);
+        return Objects.hash(idEvento, nomeEvento, dataEvento, localEvento, descricaoEvento);
     }
 }
