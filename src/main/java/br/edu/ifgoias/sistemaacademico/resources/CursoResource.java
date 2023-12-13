@@ -50,6 +50,7 @@ public class CursoResource {
 	public ResponseEntity<CursoDTO> insert(@RequestBody CursoDTO dto) {
 		Curso curso = new CursoMapper().convertDTOParaEntidade(dto);
 		curso = service.insert(curso);
+
 		CursoDTO response = new CursoMapper().convertEntidadeParaDTO(curso);
 		return ResponseEntity.ok().body(response);
 	}
@@ -64,9 +65,11 @@ public class CursoResource {
 	@ResponseStatus(HttpStatus.OK)		
 	public ResponseEntity<CursoDTO> update (@PathVariable Integer id, @RequestBody CursoDTO dto){
 		CursoMapper cursoMapper = new CursoMapper();
+
 		Curso curso = cursoMapper.convertDTOParaEntidade(dto);
 		curso.setIdCurso(id);
 		curso = service.update(id, curso);
+
 		CursoDTO response = cursoMapper.convertEntidadeParaDTO(curso);
 		return ResponseEntity.ok().body(response);
 	}

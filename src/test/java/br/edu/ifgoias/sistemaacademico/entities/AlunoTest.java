@@ -3,11 +3,15 @@ package br.edu.ifgoias.sistemaacademico.entities;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 
 class AlunoTest {
+
+    private static final Logger LOGGER = mock(Logger.class);
 
     @Test
     void givenDefaultConstructor_whenCreatingObject_thenCorrectlyInitialized() {
@@ -182,5 +186,46 @@ class AlunoTest {
         Aluno aluno1 = new Aluno(1, "Nome", "M", new Date());
         Aluno aluno2 = new Aluno(2, "Outro Nome", "F", new Date());
         assertNotEquals(aluno1, aluno2);
+    }
+
+    @Test
+    void whenEqualsCalledWithDifferentClassObject_thenFalse() {
+        // Given
+        Aluno aluno = new Aluno(1, "Aluno 1", "M", new Date());
+        Object outroObjeto = new Object();
+
+        // Then
+        assertNotEquals(aluno, outroObjeto);
+    }
+
+    @Test
+    void whenEqualsCalledWithNullObject_thenFalse() {
+        // Given
+        Aluno aluno = new Aluno(1, "Aluno 1", "M", new Date());
+
+        // Then
+        assertNotNull(aluno);
+    }
+
+    @Test
+    void whenAllAttributesAreNull_thenCorrectHashCode() {
+        Aluno aluno = new Aluno();
+        int expectedHashCode = 31 * 31 * 31 * 31;
+        assertEquals(expectedHashCode, aluno.hashCode());
+    }
+
+    @Test
+    void whenAllAttributesAreNonNull_thenCorrectHashCode() {
+        Date dtNasc = new Date();
+        Aluno aluno = new Aluno(1, "Aluno", "M", dtNasc);
+        int expectedHashCode = 31 * (31 * (31 * (31 + dtNasc.hashCode()) + Integer.hashCode(1)) + "Aluno".hashCode()) + "M".hashCode();
+        assertEquals(expectedHashCode, aluno.hashCode());
+    }
+
+    @Test
+    void givenTwoObjectsWithDifferentAttributes_whenHashCode_thenDifferentHashCode() {
+        Aluno aluno1 = new Aluno(1, "Aluno1", "M", new Date());
+        Aluno aluno2 = new Aluno(2, "Aluno2", "F", new Date());
+        assertNotEquals(aluno1.hashCode(), aluno2.hashCode());
     }
 }
